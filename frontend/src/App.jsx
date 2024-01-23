@@ -22,24 +22,31 @@ function App(){
   const receiveMessage = (message)=>
     setMessages((state)=>[...state,message])
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="h-screen bg-zinc-800 text-white flex items-center justify-center">
+      <form onSubmit={handleSubmit} className="bg-zinc-900 p-100">
+        <h1 className="text-2xl font-bold my-2">Chat en react</h1>
         <input 
           type="text" 
           placeholder="Escribe aqui su mensaje..." 
+          className="border-2 border-zinc-500 p-2 w-full text-black"
           onChange={(e)=>setMessage(e.target.value)}  
         />
-        <button type="submit">Enviar</button>
-      </form>
-      <ul>
+        <ul >
         {
           messages.map((message,i)=>(
-            <li key={i}>
-              {message.from}:{message.body}
+            <li className={
+              `my-2 p-2 table rounded-md ${message.from === 'Me'?
+              'bg-sky-700':`bg-black ml-auto` 
+            }`} 
+            key={i}>
+              <span className="text-xs text-slate-300 block">{message.from}</span> 
+              <span className="text-sm">{message.body}</span>
               </li>
           ))
         }
       </ul>
+      </form>
+   
     </div>
   )
 }
